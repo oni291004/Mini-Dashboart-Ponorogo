@@ -17,7 +17,7 @@ app = Dash(__name__, suppress_callback_exceptions=True)
 app.title = "Dashboard Interaktif Kabupaten Ponorogo"
 
 # ------------- Paths & Folder Setup -------------
-data_folder = "C:/Users/otnie/Latihan/.vscode/Database"
+data_folder = "Database"
 os.makedirs(data_folder, exist_ok=True)
 
 # ----------------- 🔄 Auto Convert Excel → CSV -----------------
@@ -49,7 +49,7 @@ def convert_excel_to_csv(folder_path):
 csv_files = convert_excel_to_csv(data_folder)
 
 # ----------------- GeoJSON -----------------
-geojson_path = "C:/Users/otnie/Latihan/.vscode/35.02_Ponorogo/35.02_kecamatan.geojson"
+geojson_path = "35.02_kecamatan.geojson"
 if os.path.exists(geojson_path):
     with open(geojson_path, "r", encoding="utf-8") as f:
         geojson = json.load(f)
@@ -335,3 +335,8 @@ def update_eda_tab(selected_tab, eda_store):
 # ----------------- Run -----------------
 if __name__ == "__main__":
     app.run(debug=True)
+
+server = app.server
+
+if __name__ == "__main__":
+    app.run_server(host="0.0.0.0", port=8050, debug=False)
